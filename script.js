@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", start);
 const HTML = {};
 let studentJSON = [];
 let allOfStudent = [];
+let currentList = [];
 let countsOfStudents;
 
 const Student = {
@@ -16,7 +17,7 @@ const Student = {
   house: ""
 };
 
-//START OG HENT JSON
+//START AND GET JSON
 
 function start() {
   HTML.template = document.querySelector(".student-temp");
@@ -27,9 +28,22 @@ function start() {
 
   countsOfStudents = 0;
 
+  // Adds event-listeners to filter and sort buttons
+  // FILTER BUTTONS.
+
+  document.querySelector("[data-filter='Gryffindor']").addEventListener("click", filterGryffindor);
+  document.querySelector("[data-filter='Hufflepuff']").addEventListener("click", filterHufflepuff);
+  document.querySelector("[data-filter='Ravenclaw']").addEventListener("click", filterRavenclaw);
+  document.querySelector("[data-filter='Slytherin']").addEventListener("click", filterSlytherin);
+  document.querySelector("[data-filter='all']").addEventListener("click", showAll);
+
+  // SORT BUTTONS
+
   getJson();
-  document.querySelector("select#theme").addEventListener("change", selectTheme);
+  //changes body color with dropdown menu.
+  /*   document.querySelector("select#theme").addEventListener("change", selectTheme); */
 }
+//ASYNC Function getJson.
 
 async function getJson() {
   const jsonData = await fetch("https://petlatkea.dk/2020/hogwarts/students.json");
@@ -37,9 +51,61 @@ async function getJson() {
   studentJSON = await jsonData.json();
   arrangeObjects();
 }
-
+// NOT NEEDED
 function selectTheme() {
   document.querySelector("body").setAttribute("data-house", this.value);
+}
+
+//Display List function that helps the filtering to work.
+
+function displayList(student) {
+  // clear the list
+  document.querySelector(".listofstudents").innerHTML = "";
+
+  // build a new list
+  currentList.forEach(showStudent);
+}
+
+//Filtering by House.
+
+function filterGryffindor() {
+  currentList = allOfStudent.filter(isGryffindor);
+  displayList(currentList);
+}
+
+function filterHufflepuff() {
+  currentList = allOfStudent.filter(isHufflepuff);
+  displayList(currentList);
+}
+function filterRavenclaw() {
+  currentList = allOfStudent.filter(isRavenclaw);
+  displayList(currentList);
+}
+function filterSlytherin() {
+  currentList = allOfStudent.filter(isSlytherin);
+  displayList(currentList);
+}
+function showAll() {
+  currentList = allOfStudent.filter(isAll);
+  displayList(currentList);
+}
+
+function isGryffindor(student) {
+  return student.house === "Gryffindor";
+}
+
+function isHufflepuff(student) {
+  return student.house === "Hufflepuff";
+}
+function isRavenclaw(student) {
+  return student.house === "Ravenclaw";
+}
+function isSlytherin(student) {
+  return student.house === "Slytherin";
+}
+
+function isAll(student) {
+  return student;
 }
 
 //POPUP
@@ -128,6 +194,15 @@ function cleanData(studentData) {
   student.image = student.lastName + "_" + firstletter;
   student.image = student.image.toLowerCase();
 
+  if (student.lastName == "Patil") {
+    student.image = student.lastName + "_" + student.firstName;
+    student.image = student.image.toLowerCase();
+  } else if (student.lastName == "Finch-fletchley") {
+    student.image = "fletchley_j";
+  } else if (student.lastName == null) {
+    student.image = null;
+  }
+
   // HOUSE
   student.house = studentData.house.toLowerCase();
   student.house = student.house.trim();
@@ -160,6 +235,72 @@ function showStudent(student) {
   });
 }
 
-//FILTRER
+//sorting
+/* 
+function sortingName() {
+  const sortName = currentList.sort(compareName);
+  displayList(currentList);
 
-//SORTER
+  console.log(sortingName);
+}
+function sortingType() {
+  const sortType = currentList.sort(compareType);
+  displayList(currentList);
+
+  console.log(sortingType);
+}
+function sortingDesc() {
+  const sortDesc = currentList.sort(compareDesc);
+  displayList(currentList);
+
+  console.log(sortingDesc);
+}
+function sortingAge() {
+  const sortAge = currentList.sort(compareAge);
+  displayList(currentList);
+
+  console.log(sortingAge);
+}
+
+function compareName(a, b) {
+  if (a.name < b.name) {
+    return -1;
+  } else if (a.name > b.name) {
+    return -1;
+  } else {
+    return 1;
+  }
+}
+
+function compareType(a, b) {
+  if (a.type < b.type) {
+    return -1;
+  } else if (a.type > b.type) {
+    return -1;
+  } else {
+    return 1;
+  }
+}
+
+function compareDesc(a, b) {
+  if (a.desc < b.desc) {
+    return -1;
+  } else if (a.desc > b.desc) {
+    return -1;
+  } else {
+    return 1;
+  }
+}
+
+function compareAge(a, b) {
+  if (a.age < b.age) {
+    return -1;
+  } else if (a.age > b.age) {
+    return -1;
+  } else {
+    return 1;
+  }
+}
+
+currentList.sort(compareName);
+console.log(compareName); */
