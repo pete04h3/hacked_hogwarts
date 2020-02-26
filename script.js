@@ -9,6 +9,8 @@ let studentJSON = [];
 let allOfStudent = [];
 let currentList = [];
 let countsOfStudents;
+let winners = [];
+let expelledStudents = [];
 
 const Student = {
   firstName: "",
@@ -17,7 +19,10 @@ const Student = {
   house: "",
   middleName: null,
   nickName: null,
-  image: null
+  image: null,
+  star: false,
+  winner: false,
+  expelled: false
 };
 
 //START AND GET JSON
@@ -28,19 +33,23 @@ function start() {
   HTML.popup = document.querySelector(".popup");
   HTML.wrapper = document.querySelector(".section-wrapper");
   HTML.studentName = document.querySelector(".contentpopup>h2");
+  allOfStudent = currentList;
 
   countsOfStudents = 0;
 
   // Adds event-listeners to filter and sort buttons
   // FILTER BUTTONS.
+  //THE HARD-CODED WAY
 
-  document.querySelector("[data-filter='Gryffindor']").addEventListener("click", filterGryffindor);
+  /* document.querySelector("[data-filter='Gryffindor']").addEventListener("click", filterGryffindor);
   document.querySelector("[data-filter='Hufflepuff']").addEventListener("click", filterHufflepuff);
   document.querySelector("[data-filter='Ravenclaw']").addEventListener("click", filterRavenclaw);
   document.querySelector("[data-filter='Slytherin']").addEventListener("click", filterSlytherin);
   document.querySelector("[data-filter='all']").addEventListener("click", showAll);
+  document.querySelector("[data-filter='expelled']").addEventListener("click", showExpelled); */
 
-  // SORT BUTTONS
+  // SORT BUTTONS & FILTER BUTTONS
+  // THE EASY WAY
 
   sortingStudents.forEach(button => {
     button.addEventListener("click", sortButtonClick);
@@ -50,15 +59,11 @@ function start() {
     botton.addEventListener("click", filterBottonClick);
   });
 
-  /*   document.querySelector("[data-sort='firstname']").addEventListener("click", sortingFirstName);
-  document.querySelector("[data-sort='lastname']").addEventListener("click", sortingLastName);
-  document.querySelector("[data-sort='house']").addEventListener("click", sortingHouse);
-  document.querySelector("[data-sort='gender']").addEventListener("click", sortingGender); */
-
   getJson();
   //changes body color with dropdown menu.
   /*   document.querySelector("select#theme").addEventListener("change", selectTheme); */
 }
+
 //ASYNC Function getJson.
 
 async function getJson() {
@@ -241,6 +246,8 @@ function cleanData(studentData) {
 
 function showStudent(student) {
   let klon = HTML.template.cloneNode(true).content;
+  let expellStudent = klon.querySelector("[data-field=expell]");
+  let studentWinner = klon.querySelector("[data-field=winner]");
 
   if (student.lastName == undefined) {
     klon.querySelector("li").textContent = student.firstName;
@@ -258,6 +265,119 @@ function showStudent(student) {
   HTML.dest.lastElementChild.addEventListener("click", () => {
     showPopup(student);
   });
+
+  /*  if (student.star === true) {
+    studentStar.textContent = "⭐";
+  } else {
+    studentStar.textContent = "☆";
+  } */
+
+  //star click function
+
+  expellStudent.addEventListener("click", function() {
+    expellAStudent(student);
+  });
+
+  //setwinner
+
+  if (student.winner === true) {
+    studentWinner.classList.remove("grayout");
+  } else {
+    studentWinner.classList.add("grayout");
+  }
+
+  //winner click function
+  studentWinner.addEventListener("click", function() {
+    checkWinner(student);
+  });
+}
+
+//STJERNER
+
+function expellAStudent(student) {
+  console.log("henrik");
+
+  student.expelled = true;
+
+  expelledStudents.push(student);
+
+  currentList = allOfStudent.filter(student => {
+    return student.expelled === false;
+  });
+
+  console.log(student.expelled);
+  displayList(currentList);
+}
+
+//Winner
+//first make new array with animals set to be winners
+//Checks if animal.type and winner.type are the same and store in variable
+//if they are the same animal.winner is false
+//if the animal types are the same you cannot choose that as a winner
+//only one type of animal can be a
+
+function checkWinner(student) {
+  winners = currentList.filter(student => student.winner === true);
+  const winnerType = winners.some(winner => {
+    return winner.house === student.house;
+  });
+  if (student.winner === true) {
+    student.winner = false;
+  } else {
+    if (winnerType) {
+      //calling oneWinnerOfEachType function
+      oneWinnerOfEachType();
+      student.winner = false;
+    } else if (winners.length == 2) {
+      //calling removeOneToAddAnother function
+      removeOneToAddAnother();
+      student.winner = false;
+    } else {
+      student.winner = true;
+    }
+  }
+
+  console.log(winners);
+  console.log(student.winner);
+  displayList(currentList);
+}
+
+//Eventslisterners on buttons in dialog popups
+//Printing the correct text string into dialog popups
+
+function oneWinnerOfEachType() {
+  document.querySelector("#onlyonekind").classList.add("show");
+  document.querySelector("#onlyonekind .closebutton").addEventListener("click", closeDialog);
+  document.querySelector("#onlyonekind .removebutton1").addEventListener("click", () => {
+    closeDialog();
+  });
+  console.log(oneWinnerOfEachType);
+  document.querySelector("#onlyonekind .student1").textContent = winners[0].firstName + " " + winners[0].lastName + " " + winners[0].house;
+}
+
+function removeOneToAddAnother() {
+  document.querySelector("#onlytwowinners").classList.add("show");
+  document.querySelector("#onlytwowinners .closebutton").addEventListener("click", closeDialog);
+  document.querySelector("#onlytwowinners .removebutton1").addEventListener("click", () => {
+    removeOneAnimal();
+  });
+  console.log(removeOneToAddAnother);
+  document.querySelector("#onlytwowinners .student1").textContent = winners[0].firstName + " " + winners[0].lastName + " " + winners[0].house;
+  document.querySelector("#onlytwowinners .student2").textContent = winners[1].firstName + " " + winners[1].lastName + " " + winners[1].house;
+}
+
+//DIALOG BOX
+
+function closeDialog() {
+  document.querySelector("#onlytwowinners").classList.remove("show");
+  document.querySelector("#onlyonekind").classList.remove("show");
+  start();
+}
+
+function removeOneAnimal() {
+  document.querySelector("#onlytwowinners").classList.remove("show");
+  // TODO: Remove winner icon and make the selected student being removed
+  // to false again. NEED HELP!
 }
 
 //sorting
@@ -318,6 +438,7 @@ function mySort(sortBy, sortDirection) {
 function filterBottonClick() {
   const filter = this.dataset.filter;
   clearAllSort();
+  console.log(filter);
   myFilter(filter);
 }
 
@@ -325,6 +446,9 @@ function myFilter(filter) {
   console.log("myFilter", filter);
   if (filter === "all") {
     currentList = allOfStudent.filter(allOfStudent => true);
+    displayList(currentList);
+  } else if (filter === "expelled") {
+    currentList = expelledStudents;
     displayList(currentList);
   } else {
     currentList = allOfStudent.filter(student => student.house === filter);

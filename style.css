@@ -46,6 +46,16 @@ button {
   display: inline-block;
 }
 
+.grayout {
+  filter: grayscale(100%);
+}
+
+/****** WINNER ******/
+[data-field="winner"][data-winner="false"] {
+  filter: grayscale(100%);
+  cursor: pointer;
+}
+
 /*/ stjålet https://stackoverflow.com/questions/1895476/how-do-i-style-a-select-dropdown-with-only-css /*/
 select {
   -webkit-appearance: button;
@@ -165,6 +175,66 @@ li:hover {
   color: red;
   cursor: pointer;
 }
+
+/******** DIALOG styling **********/
+
+.dialog {
+  display: none;
+}
+
+.dialog.show {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.dialogcontent {
+  background-color: rgb(233, 233, 255);
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 10vw 8vw 8vw 8vw;
+  position: relative;
+}
+
+.dialog h1 {
+  margin: 0;
+  font-size: 130%;
+}
+
+.dialog h2 {
+  margin: 0.5em 0;
+  font-size: 110%;
+  font-weight: lighter;
+}
+
+.dialog .closebutton {
+  -moz-appearance: none;
+  appearance: none;
+  position: absolute;
+  top: 4vw;
+  right: 4vw;
+  border: none;
+  background-color: transparent;
+  font-size: 90%;
+  color: darkgray;
+}
+
+.dialog .closebutton:hover {
+  color: black;
+}
+
+.expellstudent {
+  border: 2px solid black;
+  background: radial-gradient(red, transparent);
+  margin: 5px;
+}
+
+/****HOUSE COLORS****/
 
 [data-house="Hufflepuff"] {
   --primary-color: #d6c913;

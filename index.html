@@ -29,10 +29,9 @@
             <button class="filter" data-action="filter" data-filter="Ravenclaw">Ravenclaw</button>
             <button class="filter" data-action="filter" data-filter="Slytherin">Slytherin</button>
             <button class="filter" data-action="filter" data-filter="all">All</button>
+            <button class="filter" data-action="filter" data-filter="expelled">Expelled Students</button>
           </div>
           <div class="sort_buttons">
-            <button class="sort" data-action="sort" data-sort-direction="asc" data-sort="star">⭐</button>
-
             <button class="sort" data-action="sort" data-sort-direction="asc" data-sort="firstName">First name</button>
             <button class="sort" data-action="sort" data-sort-direction="asc" data-sort="lastName">Last name</button>
             <button class="sort" data-action="sort" data-sort-direction="asc" data-sort="gender">Gender</button>
@@ -42,7 +41,7 @@
             </div>
           </div>
         </label>
-        <ul class="listofstudents"></ul>
+        <table class="listofstudents"></table>
       </section>
       <div class="popup">
         <article class="contentpopup">
@@ -56,8 +55,44 @@
     </main>
 
     <template class="student-temp">
+      <td data-field="winner">🏆</td>
+      <button class="expellstudent" data-field="expell">Expell</button>
       <li></li>
     </template>
+
+    <!--     <template class="student-temp">
+      <tr>
+        <td data-field="winner">🏆</td>
+
+        <td data-field="firstName">First Name</td>
+        <button class="expellstudent" data-field="expell">Expell</button>
+        <td data-field="lastName">Last Name</td>
+        <td data-field="gender">Gender</td>
+        <td data-field="house">House</td>
+        <td data-field="bloodtype">Blood Type</td>
+      </tr>
+    </template> -->
+
+    <!-- Dialogs for handling too many winners -->
+
+    <div id="onlytwowinners" class="dialog">
+      <div class="dialogcontent">
+        <button class="closebutton">close</button>
+        <h1>You can only have two winners!</h1>
+        <h2>Remove one, before you appoint more</h2>
+        <p><button class="removebutton1" data-action="remove1">remove</button> <span class="student1">NAME, the TYPE</span></p>
+        <p><button class="removebutton2" data-action="remove2">remove</button> <span class="student2">NAME, the TYPE</span></p>
+      </div>
+    </div>
+
+    <div id="onlyonekind" class="dialog">
+      <div class="dialogcontent">
+        <button class="closebutton">close</button>
+        <h1>You can only have one winner of each type</h1>
+        <h2>Remove the other if you want to appoint a new one</h2>
+        <p><button class="removebutton1" data-action="remove1">remove</button> <span class="student1">NAME, the TYPE</span></p>
+      </div>
+    </div>
     <footer></footer>
     <script src="script.js"></script>
   </body>
