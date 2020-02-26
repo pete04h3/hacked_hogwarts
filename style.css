@@ -19,10 +19,31 @@ html {
   font-family: "sans serif";
 }
 
-header img {
-  width: 30vh;
+.logo {
+  background-image: url(logo.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  width: 30%;
+  height: 50vh;
   margin: 0 auto;
-  display: block;
+  margin-top: 20px;
+}
+
+.logo:hover {
+  background-image: url(harry.gif);
+  border: 0px;
+  transform: scale(1.5);
+  transition: 0.4s ease-in-out;
+  cursor: pointer;
+}
+
+.searchbar {
+  margin-top: 10px;
+}
+
+button {
+  display: inline-block;
 }
 
 /*/ stjålet https://stackoverflow.com/questions/1895476/how-do-i-style-a-select-dropdown-with-only-css /*/
@@ -138,6 +159,11 @@ li:hover {
   background-color: transparent;
   appearance: none;
   color: var(--secondary-color);
+}
+
+.close:hover {
+  color: red;
+  cursor: pointer;
 }
 
 [data-house="Hufflepuff"] {

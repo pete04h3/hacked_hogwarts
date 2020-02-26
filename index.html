@@ -10,7 +10,7 @@
 
   <body>
     <header>
-      <img src="logo.png" alt="logo" />
+      <div class="logo"></div>
     </header>
     <main>
       <section class="section-wrapper">
@@ -31,12 +31,15 @@
             <button class="filter" data-action="filter" data-filter="all">All</button>
           </div>
           <div class="sort_buttons">
-            <button class="sort" data-action="sort" data-sort-direction="asc" data-sort="star">⭐</th>
+            <button class="sort" data-action="sort" data-sort-direction="asc" data-sort="star">⭐</button>
 
-            <button class="sort"  data-action="sort" data-sort-direction="asc" data-sort="firstName">First name</th>
-            <button class="sort"  data-action="sort" data-sort-direction="asc" data-sort="lastName">Last name</th>
-            <button class="sort"  data-action="sort" data-sort-direction="asc" data-sort="gender">Gender</th>
-            <button class="sort"  data-action="sort" data-sort-direction="asc" data-sort="house">House</th>
+            <button class="sort" data-action="sort" data-sort-direction="asc" data-sort="firstName">First name</button>
+            <button class="sort" data-action="sort" data-sort-direction="asc" data-sort="lastName">Last name</button>
+            <button class="sort" data-action="sort" data-sort-direction="asc" data-sort="gender">Gender</button>
+            <button class="sort" data-action="sort" data-sort-direction="asc" data-sort="house">House</button>
+            <div class="searchbar">
+              <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" />
+            </div>
           </div>
         </label>
         <ul class="listofstudents"></ul>
