@@ -3,6 +3,8 @@
 document.addEventListener("DOMContentLoaded", start);
 
 const HTML = {};
+const sortingStudents = document.querySelectorAll(".sort");
+const myButtons = document.querySelectorAll(".filter");
 let studentJSON = [];
 let allOfStudent = [];
 let currentList = [];
@@ -11,10 +13,11 @@ let countsOfStudents;
 const Student = {
   firstName: "",
   lastName: "",
+  gender: "",
+  house: "",
   middleName: null,
   nickName: null,
-  image: null,
-  house: ""
+  image: null
 };
 
 //START AND GET JSON
@@ -38,6 +41,19 @@ function start() {
   document.querySelector("[data-filter='all']").addEventListener("click", showAll);
 
   // SORT BUTTONS
+
+  sortingStudents.forEach(button => {
+    button.addEventListener("click", sortButtonClick);
+  });
+
+  myButtons.forEach(botton => {
+    botton.addEventListener("click", filterBottonClick);
+  });
+
+  /*   document.querySelector("[data-sort='firstname']").addEventListener("click", sortingFirstName);
+  document.querySelector("[data-sort='lastname']").addEventListener("click", sortingLastName);
+  document.querySelector("[data-sort='house']").addEventListener("click", sortingHouse);
+  document.querySelector("[data-sort='gender']").addEventListener("click", sortingGender); */
 
   getJson();
   //changes body color with dropdown menu.
@@ -117,6 +133,8 @@ function showPopup(student) {
   document.querySelector(".contentpopup").setAttribute("data-house", student.house);
 
   document.querySelector(".contentpopup>h3").textContent = "House: " + student.house;
+
+  document.querySelector(".contentpopup>h4").textContent = "Gender: " + student.gender;
 
   document.querySelector(".contentpopup>img").src = `images/${student.image}.png`;
 
@@ -203,6 +221,13 @@ function cleanData(studentData) {
     student.image = null;
   }
 
+  // GENDER
+
+  let genderDisplay = studentData.gender;
+  let firstCharGender = genderDisplay.substring(0, 1);
+  firstCharGender = firstCharGender.toUpperCase();
+  student.gender = firstCharGender + genderDisplay.substring(1);
+
   // HOUSE
   student.house = studentData.house.toLowerCase();
   student.house = student.house.trim();
@@ -236,6 +261,76 @@ function showStudent(student) {
 }
 
 //sorting
+
+function sortButtonClick() {
+  console.log("sortButton");
+
+  //const sort = this.dataset.sort;
+  if (this.dataset.action === "sort") {
+    clearAllSort();
+    console.log("forskellig fra sorted", this.dataset.action);
+    this.dataset.action = "sorted";
+  } else {
+    if (this.dataset.sortDirection === "asc") {
+      this.dataset.sortDirection = "desc";
+      console.log("sortdir desc", this.dataset.sortDirection);
+    } else {
+      this.dataset.sortDirection = "asc";
+      console.log("sortdir asc", this.dataset.sortDirection);
+    }
+  }
+  mySort(this.dataset.sort, this.dataset.sortDirection);
+}
+
+function clearAllSort() {
+  console.log("clearAllSort");
+  sortingStudents.forEach(botton => {
+    botton.dataset.action = "sort";
+  });
+}
+
+function mySort(sortBy, sortDirection) {
+  console.log(`mySort-, ${sortBy} sortDirection-  ${sortDirection}  `);
+  let desc = 1;
+  currentList = allOfStudent.filter(allOfStudent => true);
+
+  if (sortDirection === "desc") {
+    desc = -1;
+  }
+
+  currentList.sort(function(a, b) {
+    var x = a[sortBy];
+    var y = b[sortBy];
+    if (x < y) {
+      return -1 * desc;
+    }
+    if (x > y) {
+      return 1 * desc;
+    }
+    return 0;
+  });
+
+  displayList(currentList);
+}
+
+//--------------------------------------FILTER
+
+function filterBottonClick() {
+  const filter = this.dataset.filter;
+  clearAllSort();
+  myFilter(filter);
+}
+
+function myFilter(filter) {
+  console.log("myFilter", filter);
+  if (filter === "all") {
+    currentList = allOfStudent.filter(allOfStudent => true);
+    displayList(currentList);
+  } else {
+    currentList = allOfStudent.filter(student => student.house === filter);
+    displayList(currentList);
+  }
+}
 /* 
 function sortingName() {
   const sortName = currentList.sort(compareName);

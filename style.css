@@ -1,10 +1,11 @@
 :root {
-  --primary-color: rgba(34, 151, 180, 0.229);
+  --primary-color: rgba(3, 40, 49, 0.719);
   --secondary-color: rgb(43, 43, 43);
 }
 
 * {
   box-sizing: border-box;
+  cursor: url(http://cur.cursors-4u.net/user/use-1/use160.cur), auto !important;
 }
 
 body {
@@ -19,8 +20,9 @@ html {
 }
 
 header img {
-  width: 20vh;
-  margin: auto;
+  width: 30vh;
+  margin: 0 auto;
+  display: block;
 }
 
 /*/ stjålet https://stackoverflow.com/questions/1895476/how-do-i-style-a-select-dropdown-with-only-css /*/
@@ -85,7 +87,14 @@ li {
   color: var(--secondary-color);
   line-height: 1.5;
   font-family: var(--paragraph-font);
+  list-style: none;
 }
+
+li:hover {
+  color: darkred;
+  cursor: pointer;
+}
+
 .section-wrapper {
   padding: 50px;
 }
@@ -97,6 +106,7 @@ li {
   top: 0;
   left: 0;
   background-color: rgba(208, 174, 174, 0.637);
+  border: 2px solid goldenrod;
   justify-content: center;
   align-items: center;
 }
@@ -114,6 +124,7 @@ li {
   padding: 30px;
   position: relative;
   box-shadow: 10px 10px 20px rgba(215, 117, 117, 0.1);
+  border: 2px solid gold;
 }
 
 .close {
@@ -130,21 +141,21 @@ li {
 }
 
 [data-house="Hufflepuff"] {
-  --primary-color: #e6b947;
+  --primary-color: #d6c913;
   --secondary-color: #000000;
 }
 
 [data-house="Gryffindor"] {
-  --primary-color: #85428f;
-  --secondary-color: #d0a003;
+  --primary-color: #7f0909;
+  --secondary-color: #ffc500;
 }
 
 [data-house="Ravenclaw"] {
-  --primary-color: #ff8ce4;
-  --secondary-color: #dc8e3b;
+  --primary-color: #000a90;
+  --secondary-color: #946b2d;
 }
 
 [data-house="Slytherin"] {
-  --primary-color: #1b7233;
-  --secondary-color: #4f4d4d;
+  --primary-color: #0d6217;
+  --secondary-color: #aaaaaa;
 }
