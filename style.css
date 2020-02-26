@@ -106,7 +106,7 @@ h4 {
 
 .listofstudents {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: repeat(6, 1fr);
   background-color: whitesmoke;
   padding: 50px;
   border: 3px solid rgba(68, 102, 140, 0.8);
