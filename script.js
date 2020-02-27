@@ -356,7 +356,7 @@ function checkWinner(student) {
       //calling oneWinnerOfEachType function
       oneWinnerOfEachType();
       student.winner = false;
-    } else if (winners.length == 2) {
+    } else if (winners.length == 8) {
       //calling removeOneToAddAnother function
       removeOneToAddAnother();
       student.winner = false;

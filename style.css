@@ -230,7 +230,8 @@ li:hover {
 
 .expellstudent {
   border: 2px solid black;
-  background: radial-gradient(red, transparent);
+  background: black;
+  color: white;
   margin: 5px;
 }
 
