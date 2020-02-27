@@ -235,6 +235,11 @@ li:hover {
   margin: 5px;
 }
 
+.searchbar {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 /****HOUSE COLORS****/
 
 [data-house="Hufflepuff"] {

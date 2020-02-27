@@ -63,6 +63,19 @@ function start() {
     botton.addEventListener("click", filterBottonClick);
   });
 
+  // SEARCHBAR
+  let search = document.querySelector("#search");
+  console.log("Found search");
+  console.log(search);
+  let el = document.querySelectorAll(".fullname");
+
+  search.addEventListener("keyup", function() {
+    console.log("keystroke");
+
+    const searchList = currentList.filter(student => student.firstName.toLowerCase().includes(search.value.toLowerCase()));
+    displayList(searchList);
+  });
+
   getJson();
   //changes body color with dropdown menu.
   document.querySelector("select#theme").addEventListener("change", selectTheme);
@@ -87,12 +100,12 @@ function selectTheme() {
 
 //Display List function that helps the filtering to work.
 
-function displayList(student) {
+function displayList(list) {
   // clear the list
   document.querySelector(".listofstudents").innerHTML = "";
 
   // build a new list
-  currentList.forEach(showStudent);
+  list.forEach(showStudent);
 }
 
 //Filtering by House.

@@ -36,9 +36,9 @@
             <button class="sort" data-action="sort" data-sort-direction="asc" data-sort="lastName">Last name</button>
             <button class="sort" data-action="sort" data-sort-direction="asc" data-sort="gender">Gender</button>
             <button class="sort" data-action="sort" data-sort-direction="asc" data-sort="house">House</button>
-            <button class="sort" data-action="sort" data-sort-direction="asc" data-sort="bloodStatus">Blood Status</button>
+
             <div class="searchbar">
-              <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" />
+              <input id="search" type="text" placeholder="Search student" />
             </div>
           </div>
         </label>
@@ -59,7 +59,7 @@
     <template class="student-temp">
       <td data-field="winner">🏆</td>
       <button class="expellstudent" data-field="expell">Expell</button>
-      <li></li>
+      <li class="fullname"></li>
     </template>
 
     <!-- Dialogs for handling too many winners -->
