@@ -369,7 +369,7 @@ function checkWinner(student) {
       //calling oneWinnerOfEachType function
       oneWinnerOfEachType();
       student.winner = false;
-    } else if (winners.length == 8) {
+    } else if (winners.length == 2) {
       //calling removeOneToAddAnother function
       removeOneToAddAnother();
       student.winner = false;
@@ -399,9 +399,10 @@ function oneWinnerOfEachType() {
 function removeOneToAddAnother() {
   document.querySelector("#onlytwowinners").classList.add("show");
   document.querySelector("#onlytwowinners .closebutton").addEventListener("click", closeDialog);
-  document.querySelector("#onlytwowinners .removebutton1").addEventListener("click", () => {
+  document.querySelector("#onlytwowinners .removebutton1 .removebutton2").addEventListener("click", () => {
     removeOneAnimal();
   });
+
   console.log(removeOneToAddAnother);
   document.querySelector("#onlytwowinners .student1").textContent = winners[0].firstName + " " + winners[0].lastName + " " + winners[0].house;
   document.querySelector("#onlytwowinners .student2").textContent = winners[1].firstName + " " + winners[1].lastName + " " + winners[1].house;
