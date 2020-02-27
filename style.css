@@ -97,6 +97,7 @@ h1 {
   margin-bottom: 15px;
   margin-top: 0;
   font-weight: 300;
+  margin-left: 5px;
 }
 
 h2 {
@@ -124,6 +125,7 @@ h4 {
   border: 1px solid whitesmoke;
   grid-column-gap: 5px;
   width: 100%;
+  margin-left: 5px;
 }
 
 .icons {
@@ -145,6 +147,7 @@ li {
   color: palegoldenrod;
   transform: scale(1.1);
   margin-bottom: 10px;
+  margin-left: 10px;
 }
 
 .sort {
@@ -154,6 +157,7 @@ li {
   color: palegoldenrod;
   transform: scale(1.1);
   margin-bottom: 10px;
+  margin-left: 10px;
 }
 
 .sort:hover {
@@ -290,6 +294,7 @@ li:hover {
 .searchbar {
   margin-top: 10px;
   margin-bottom: 10px;
+  margin-left: 5px;
 }
 
 #search {
