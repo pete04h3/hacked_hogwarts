@@ -11,12 +11,16 @@ let currentList = [];
 let countsOfStudents;
 let winners = [];
 let expelledStudents = [];
+let bloodArray = [];
+let halfBloodArray = [];
+let pureBloodArray = [];
 
 const Student = {
   firstName: "",
   lastName: "",
   gender: "",
   house: "",
+  bloodStatus: "",
   middleName: null,
   nickName: null,
   image: null,
@@ -61,17 +65,21 @@ function start() {
 
   getJson();
   //changes body color with dropdown menu.
-  /*   document.querySelector("select#theme").addEventListener("change", selectTheme); */
+  document.querySelector("select#theme").addEventListener("change", selectTheme);
 }
 
 //ASYNC Function getJson.
 
 async function getJson() {
   const jsonData = await fetch("https://petlatkea.dk/2020/hogwarts/students.json");
+  const bloodStatus = await fetch("http://petlatkea.dk/2020/hogwarts/families.json");
 
   studentJSON = await jsonData.json();
-  arrangeObjects();
+  bloodArray = await bloodStatus.json();
+
+  arrangeObjects(studentJSON, bloodArray);
 }
+
 // NOT NEEDED
 function selectTheme() {
   document.querySelector("body").setAttribute("data-house", this.value);
@@ -141,6 +149,8 @@ function showPopup(student) {
 
   document.querySelector(".contentpopup>h4").textContent = "Gender: " + student.gender;
 
+  document.querySelector(".contentpopup>h5").textContent = "Bloodstatus: " + student.blood;
+
   document.querySelector(".contentpopup>img").src = `images/${student.image}.png`;
 
   if (student.lastName == undefined) {
@@ -167,7 +177,15 @@ function showPopup(student) {
 //CLEAN UP DATA
 
 function arrangeObjects() {
+  halfBloodArray = bloodArray.half;
+  pureBloodArray = bloodArray.pure;
+
+  console.log(halfBloodArray);
+  console.log(pureBloodArray);
+
   studentJSON.forEach(cleanData);
+  currentList = allOfStudent;
+  console.log(bloodArray);
 }
 
 function cleanData(studentData) {
@@ -240,6 +258,22 @@ function cleanData(studentData) {
   houses = houses.toUpperCase();
   student.house = houses + student.house.substring(1);
 
+  //Bloodstatus
+  const halfBloodType = halfBloodArray.some(halfBlood => {
+    return halfBlood === student.lastName;
+  });
+  const pureBloodType = pureBloodArray.some(pureBlood => {
+    return pureBlood === student.lastName;
+  });
+  if (halfBloodType === true) {
+    student.blood = "Halfblood";
+  } else if (pureBloodType === true) {
+    student.blood = "Pureblood";
+  } else {
+    student.blood = "Muggle";
+  }
+  console.log(student);
+
   allOfStudent.push(student);
   showStudent(student);
 }
@@ -266,19 +300,13 @@ function showStudent(student) {
     showPopup(student);
   });
 
-  /*  if (student.star === true) {
-    studentStar.textContent = "⭐";
-  } else {
-    studentStar.textContent = "☆";
-  } */
-
-  //star click function
+  //expell click function
 
   expellStudent.addEventListener("click", function() {
     expellAStudent(student);
   });
 
-  //setwinner
+  //setprefict
 
   if (student.winner === true) {
     studentWinner.classList.remove("grayout");
@@ -286,13 +314,13 @@ function showStudent(student) {
     studentWinner.classList.add("grayout");
   }
 
-  //winner click function
+  //prefict click function
   studentWinner.addEventListener("click", function() {
     checkWinner(student);
   });
 }
 
-//STJERNER
+//Expell student
 
 function expellAStudent(student) {
   console.log("henrik");
@@ -309,7 +337,7 @@ function expellAStudent(student) {
   displayList(currentList);
 }
 
-//Winner
+//CheckWinner
 //first make new array with animals set to be winners
 //Checks if animal.type and winner.type are the same and store in variable
 //if they are the same animal.winner is false
