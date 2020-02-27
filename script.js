@@ -395,7 +395,7 @@ function checkWinner(student) {
   } else {
     if (winnerType) {
       //calling oneWinnerOfEachType function
-      oneWinnerOfEachType();
+      oneWinnerOfEachType(student);
 
       student.winner = false;
     } else if (winners.length == 8) {
@@ -417,34 +417,44 @@ function checkWinner(student) {
 //Eventslisterners on buttons in dialog popups
 //Printing the correct text string into dialog popups
 
-function oneWinnerOfEachType() {
+function oneWinnerOfEachType(student) {
   document.querySelector("#onlyonekind").classList.add("show");
   document.querySelector("#onlyonekind .closebutton").addEventListener("click", closeDialog);
-  document.querySelector("#onlyonekind .removebutton1").addEventListener("click", () => {
-    closeDialog();
-  });
+
   console.log(oneWinnerOfEachType);
-  document.querySelector("#onlyonekind .student1").textContent = winners[0].firstName + " " + winners[0].lastName + " " + winners[0].house;
+  //document.querySelector("#onlyonekind .student1").textContent = winners[0].firstName + " " + winners[0].lastName + " " + winners[0].house;
+  currentList.forEach(prefectStudent => {
+    if (prefectStudent.winner == true && prefectStudent.gender == student.gender && prefectStudent.house == student.house) {
+      console.log(prefectStudent.firstName + " " + prefectStudent.lastName);
+      document.querySelector("#onlyonekind .student1").textContent = prefectStudent.firstName + " " + prefectStudent.lastName;
+    }
+    document.querySelector("#onlyonekind > div > p > button").addEventListener("click", function() {
+      if (prefectStudent.gender == student.gender) {
+        console.log("remove");
+        prefectStudent.winner = false;
+        student.winner = true;
+        closeDialog();
+      }
+    });
+  });
 }
 
-function removeOneToAddAnother() {
+/* function removeOneToAddAnother() {
   document.querySelector("#onlytwowinners").classList.add("show");
   document.querySelector("#onlytwowinners .closebutton").addEventListener("click", closeDialog);
   document.querySelector("#onlytwowinners .removebutton1 .removebutton2").addEventListener("click", () => {
     removeOneAnimal();
-  });
+  }); */
 
-  console.log(removeOneToAddAnother);
+/*   console.log(removeOneToAddAnother);
   document.querySelector("#onlytwowinners .student1").textContent = winners[0].firstName + " " + winners[0].lastName + " " + winners[0].house;
-  document.querySelector("#onlytwowinners .student2").textContent = winners[1].firstName + " " + winners[1].lastName + " " + winners[1].house;
-}
+  document.querySelector("#onlytwowinners .student2").textContent = winners[1].firstName + " " + winners[1].lastName + " " + winners[1].house; */
 
 //DIALOG BOX
 
 function closeDialog() {
   document.querySelector("#onlytwowinners").classList.remove("show");
   document.querySelector("#onlyonekind").classList.remove("show");
-  start();
 }
 
 function removeOneAnimal() {
