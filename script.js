@@ -336,7 +336,7 @@ function showStudent(student) {
 //Expell student
 
 function expellAStudent(student) {
-  console.log("henrik");
+  console.log("expell students");
 
   student.expelled = true;
 
