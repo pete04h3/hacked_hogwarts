@@ -10,7 +10,10 @@
 
 body {
   margin: 0;
-  background-color: var(--primary-color);
+  background-image: url(dobby.jpg);
+  background-repeat: no-repeat;
+  background-size: 25%;
+  background-color: black;
   padding: 10px;
 }
 
@@ -19,13 +22,17 @@ html {
   font-family: "sans serif";
 }
 
+header {
+  height: 20vh;
+}
+
 .logo {
   background-image: url(logo.png);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-  width: 30%;
-  height: 50vh;
+  width: 20%;
+  height: 30vh;
   margin: 0 auto;
   margin-top: 20px;
 }
@@ -84,7 +91,7 @@ select {
 
 h1 {
   font-size: 3rem;
-  color: var(--secondary-color);
+  color: #aaaaaa;
   margin-bottom: 15px;
   margin-top: 0;
   font-weight: 300;
@@ -107,9 +114,12 @@ h4 {
 .listofstudents {
   display: inline-grid;
   grid-template-columns: 2% 1% 8% 20% 50%;
-  background-color: whitesmoke;
-  padding: 50px;
-  border: 3px solid rgba(68, 102, 140, 0.8);
+  background-image: url(hogwartsbaggrund2.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: saturate(2);
+  padding: 10px;
+  border: 1px solid whitesmoke;
   grid-column-gap: 5px;
   width: 100%;
 }
@@ -120,10 +130,35 @@ h4 {
 
 li {
   font-size: 1rem;
-  color: var(--secondary-color);
-  line-height: 1.5;
+  color: whitesmoke;
+  line-height: 2;
   font-family: var(--paragraph-font);
   list-style: none;
+}
+
+.filter {
+  display: inline-block;
+  background-color: black;
+  border: 1px solid bisque;
+  color: palegoldenrod;
+  transform: scale(1.1);
+  margin-bottom: 10px;
+}
+
+.sort {
+  display: inline-block;
+  background-color: black;
+  border: 1px solid bisque;
+  color: palegoldenrod;
+  transform: scale(1.1);
+  margin-bottom: 10px;
+}
+
+.sort:hover {
+  border: 2px solid blanchedalmond;
+}
+.filter:hover {
+  border: 2px solid blanchedalmond;
 }
 
 li:hover {
@@ -131,9 +166,6 @@ li:hover {
   cursor: pointer;
 }
 
-.section-wrapper {
-  padding: 50px;
-}
 .popup {
   display: none;
   width: 100vw;
@@ -179,6 +211,14 @@ li:hover {
 .close:hover {
   color: red;
   cursor: pointer;
+}
+
+.squad {
+  transform: scale(1.5);
+}
+
+.prefect {
+  transform: scale(1.3);
 }
 
 /******** DIALOG styling **********/
@@ -240,9 +280,21 @@ li:hover {
   margin: 5px;
 }
 
+.expellstudent:hover {
+  border: 2px solid red;
+  text-transform: uppercase;
+}
+
 .searchbar {
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+#search {
+  width: 200px;
+  height: 5vh;
+  background-color: black;
+  color: palegoldenrod;
 }
 
 /****HOUSE COLORS****/

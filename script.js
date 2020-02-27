@@ -77,8 +77,6 @@ function start() {
   });
 
   getJson();
-  //changes body color with dropdown menu.
-  document.querySelector("select#theme").addEventListener("change", selectTheme);
 }
 
 //ASYNC Function getJson.
@@ -91,11 +89,6 @@ async function getJson() {
   bloodArray = await bloodStatus.json();
 
   arrangeObjects(studentJSON, bloodArray);
-}
-
-// NOT NEEDED
-function selectTheme() {
-  document.querySelector("body").setAttribute("data-house", this.value);
 }
 
 //Display List function that helps the filtering to work.
@@ -315,7 +308,7 @@ function showStudent(student) {
   if (student.star === true) {
     studentStar.textContent = "⭐";
   } else {
-    studentStar.textContent = "☆";
+    studentStar.textContent = "🎖";
   }
   //star click function
 
