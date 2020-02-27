@@ -42,7 +42,9 @@
             </div>
           </div>
         </label>
-        <table class="listofstudents"></table>
+        <div class="container">
+          <table class="listofstudents"></table>
+        </div>
       </section>
       <div class="popup">
         <article class="contentpopup">
@@ -57,9 +59,16 @@
     </main>
 
     <template class="student-temp">
-      <td data-field="winner">🏆</td>
-      <button class="expellstudent" data-field="expell">Expell</button>
-      <li class="fullname"></li>
+      <tbody>
+        <div class="icons">
+          <td data-field="winner">🏆</td>
+          <td class="squad" data-field="star">⭐</td>
+
+          <button class="expellstudent" data-field="expell">Expell</button>
+          <li class="fullname"></li>
+          <li class="house"></li>
+        </div>
+      </tbody>
     </template>
 
     <!-- Dialogs for handling too many winners -->

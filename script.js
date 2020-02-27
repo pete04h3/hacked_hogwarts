@@ -301,11 +301,27 @@ function showStudent(student) {
   } else {
     klon.querySelector("li").textContent = student.firstName + " " + student.lastName;
   }
+  klon.querySelector(".house").textContent = student.house;
 
   if (student.lastName == "") {
     klon.querySelector("li").textContent = student.firstName + " " + student.lastName;
     +"";
   }
+
+  //setstar
+
+  let studentStar = klon.querySelector(".squad");
+
+  if (student.star === true) {
+    studentStar.textContent = "⭐";
+  } else {
+    studentStar.textContent = "☆";
+  }
+  //star click function
+
+  klon.querySelector(".squad").addEventListener("click", function() {
+    setStar(student);
+  });
 
   HTML.dest.appendChild(klon);
 
@@ -331,6 +347,18 @@ function showStudent(student) {
   studentWinner.addEventListener("click", function() {
     checkWinner(student);
   });
+}
+
+//STJERNER
+
+function setStar(student) {
+  if (student.star === true) {
+    student.star = false;
+  } else {
+    student.star = true;
+  }
+  console.log(student.star);
+  displayList(currentList);
 }
 
 //Expell student
@@ -360,7 +388,7 @@ function expellAStudent(student) {
 function checkWinner(student) {
   winners = currentList.filter(student => student.winner === true);
   const winnerType = winners.some(winner => {
-    return winner.house === student.house;
+    return winner.house === student.house && winner.gender === student.gender;
   });
   if (student.winner === true) {
     student.winner = false;
@@ -368,10 +396,13 @@ function checkWinner(student) {
     if (winnerType) {
       //calling oneWinnerOfEachType function
       oneWinnerOfEachType();
+
       student.winner = false;
-    } else if (winners.length == 2) {
+    } else if (winners.length == 8) {
       //calling removeOneToAddAnother function
+
       removeOneToAddAnother();
+
       student.winner = false;
     } else {
       student.winner = true;
@@ -418,8 +449,6 @@ function closeDialog() {
 
 function removeOneAnimal() {
   document.querySelector("#onlytwowinners").classList.remove("show");
-  // TODO: Remove winner icon and make the selected student being removed
-  // to false again. NEED HELP!
 }
 
 //sorting
