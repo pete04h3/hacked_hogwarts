@@ -64,6 +64,7 @@ function start() {
   });
 
   // SEARCHBAR
+  // STOLEN FROM: https://stackoverflow.com/questions/36897978/js-search-using-keyup-event-on-input-tag?fbclid=IwAR24tcWciO4KrDAUf0twPqnqm0MJgNC0hRBB8jZPPiXx7i0B7kryyX4ygvc
   let search = document.querySelector("#search");
   console.log("Found search");
   console.log(search);
@@ -290,14 +291,14 @@ function showStudent(student) {
   let studentWinner = klon.querySelector("[data-field=winner]");
 
   if (student.lastName == undefined) {
-    klon.querySelector("li").textContent = student.firstName;
+    klon.querySelector(".fullname").textContent = student.firstName;
   } else {
-    klon.querySelector("li").textContent = student.firstName + " " + student.lastName;
+    klon.querySelector(".fullname").textContent = student.firstName + " " + student.lastName;
   }
   klon.querySelector(".house").textContent = student.house;
 
   if (student.lastName == "") {
-    klon.querySelector("li").textContent = student.firstName + " " + student.lastName;
+    klon.querySelector(".fullname").textContent = student.firstName + " " + student.lastName;
     +"";
   }
 
