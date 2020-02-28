@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", start);
 const HTML = {};
 const sortingStudents = document.querySelectorAll(".sort");
 const myButtons = document.querySelectorAll(".filter");
+let ifTheSystemHasBeenHacked;
 let studentJSON = [];
 let allOfStudent = [];
 let currentList = [];
@@ -75,6 +76,13 @@ function start() {
 
     const searchList = currentList.filter(student => student.firstName.toLowerCase().includes(search.value.toLowerCase()));
     displayList(searchList);
+  });
+
+  document.addEventListener("keydown", event => {
+    const theKey = "p";
+    const key = event.key.toLowerCase();
+    if (theKey.indexOf(key) === -1) return;
+    hackTheSystem();
   });
 
   getJson();
@@ -314,7 +322,13 @@ function showStudent(student) {
   //star click function
 
   klon.querySelector(".squad").addEventListener("click", function() {
-    setStar(student);
+    if (hackTheSystem == true) {
+      setTimeout(function() {
+        setStar(student);
+      }, 500);
+    } else {
+      setStar(student);
+    }
   });
 
   HTML.dest.appendChild(klon);
@@ -351,6 +365,7 @@ function setStar(student) {
   } else {
     student.star = true;
   }
+
   console.log(student.star);
   displayList(currentList);
 }
@@ -427,6 +442,7 @@ function oneWinnerOfEachType(student) {
         console.log("remove");
         prefectStudent.winner = false;
         student.winner = true;
+        displayList(currentList);
         closeDialog();
       }
     });
@@ -449,10 +465,6 @@ function oneWinnerOfEachType(student) {
 function closeDialog() {
   document.querySelector("#onlytwowinners").classList.remove("show");
   document.querySelector("#onlyonekind").classList.remove("show");
-}
-
-function removeOneAnimal() {
-  document.querySelector("#onlytwowinners").classList.remove("show");
 }
 
 //sorting
@@ -529,4 +541,28 @@ function myFilter(filter) {
     currentList = allOfStudent.filter(student => student.house === filter);
     displayList(currentList);
   }
+}
+
+function hackTheSystem() {
+  console.log(" ALERT ALERT HACKING ACTIVATED");
+
+  hackTheSystem = true;
+
+  currentList.splice(0, 0, {
+    fullName: "peterpaN1k",
+    house: "HOGWARTS IS MY CASTLE",
+    firstName: "peterpaN1k",
+    lastName: "",
+    middleName: "paN1k",
+    nickName: "peterpaN1k",
+    blood: "CORONAVIRUS",
+    gender: "unisex",
+    image: ""
+  });
+
+  displayList(currentList);
+
+  /*   allOfStudent.forEach(student => {
+    student.firstName = Math.floor(math.random() * 25);
+  }); */
 }
