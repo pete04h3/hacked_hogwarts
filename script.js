@@ -611,11 +611,11 @@ function randomBackground() {
 
   document.querySelector(".hackingbox").style.display = "block";
   document.querySelector("#systemishacked").style.backgroundColor = randomColor();
-  document.querySelector("#systemishacked").style.border = "10px solid black";
+  document.querySelector(".hackingbox").style.border = "10px solid black";
   document.querySelector("#systemishacked").style.width = "100%";
 
   document.querySelector(".listofstudents").style.backgroundImage = "none";
-  document.querySelector(".listofstudents").style.border = "2px solid red";
+  document.querySelector(".listofstudents").style.width = "100%";
   document.querySelector(".listofstudents").style.display = "flex";
   document.querySelector(".listofstudents").style.backgroundColor = randomColor();
 
