@@ -42,6 +42,8 @@ function start() {
 
   countsOfStudents = 0;
 
+  document.querySelector("#systemishacked").classList.add("show");
+
   // Adds event-listeners to filter and sort buttons
   // FILTER BUTTONS.
   //THE HARD-CODED WAY
@@ -323,7 +325,8 @@ function showStudent(student) {
 
   klon.querySelector(".squad").addEventListener("click", function() {
     if (hackTheSystem == true) {
-      setTimeout(function() {
+      setStar(student);
+      setInterval(function() {
         setStar(student);
       }, 500);
     } else {
@@ -360,11 +363,24 @@ function showStudent(student) {
 //STJERNER
 
 function setStar(student) {
-  if (student.star === true) {
+  if (student.house == "Slytherin " && student.star == false) {
+    student.star = true;
+  } else if (student.house == "Slytherin" && student.blood == "Muggle") {
+    student.star = false;
+  } else if (student.blood == "Pureblood" && student.star == false) {
+    student.star = true;
+  } else if (student.star == true) {
+    student.star = false;
+  } else {
+    student.star = false;
+  }
+  console.log(student.blood);
+
+  /*  if (student.star === true) {
     student.star = false;
   } else {
     student.star = true;
-  }
+  } */
 
   console.log(student.star);
   displayList(currentList);
@@ -545,6 +561,7 @@ function myFilter(filter) {
 
 function hackTheSystem() {
   console.log(" ALERT ALERT HACKING ACTIVATED");
+  randomBackground();
 
   hackTheSystem = true;
 
@@ -565,4 +582,48 @@ function hackTheSystem() {
   /*   allOfStudent.forEach(student => {
     student.firstName = Math.floor(math.random() * 25);
   }); */
+}
+
+//RANDOM COLOR ON HACKED POPUP
+
+function randomColor() {
+  const r = Math.floor(Math.random() * 255);
+  const g = Math.floor(Math.random() * 255);
+  const b = Math.floor(Math.random() * 255);
+
+  console.log(randomColor);
+  return getColorString(r, g, b);
+}
+
+//Returns rgb colors with random values
+
+function getColorString(r, g, b) {
+  return `rgb(${r}, ${g}, ${b})`;
+}
+
+//Displays random color values as background on "body"
+
+function randomBackground() {
+  document.querySelector("body").style.backgroundImage = "none";
+  document.querySelector("body").style.backgroundColor = randomColor();
+
+  document.querySelector(".logo").style.filter = "invert(1)";
+
+  document.querySelector(".hackingbox").style.display = "block";
+  document.querySelector("#systemishacked").style.backgroundColor = randomColor();
+  document.querySelector("#systemishacked").style.border = "10px solid black";
+  document.querySelector("#systemishacked").style.width = "100%";
+
+  document.querySelector(".listofstudents").style.backgroundImage = "none";
+  document.querySelector(".listofstudents").style.border = "2px solid red";
+  document.querySelector(".listofstudents").style.display = "flex";
+  document.querySelector(".listofstudents").style.backgroundColor = randomColor();
+
+  document.querySelector("h1").textContent = "peterpaN1k";
+  document.querySelector("h1").style.border = "2px solid red";
+  document.querySelector("h1").style.width = "245px";
+  document.querySelector("h1").style.padding = "10px";
+  document.querySelector("h1").style.color = randomColor();
+
+  setTimeout(randomBackground, 100);
 }
