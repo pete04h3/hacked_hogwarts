@@ -261,6 +261,8 @@ function cleanData(studentData) {
     student.image = null;
   }
 
+  //Crests
+
   // GENDER
 
   let genderDisplay = studentData.gender;
