@@ -342,7 +342,7 @@ li:hover {
 [data-house="Gryffindor"] {
   --primary-color: #7f0909;
   --secondary-color: #ffc500;
-  --house-crest: url(gryffindor.jpg);
+  --house-crest: url(gryffindor.png);
 }
 
 [data-house="Ravenclaw"] {
@@ -354,5 +354,5 @@ li:hover {
 [data-house="Slytherin"] {
   --primary-color: #0d6217;
   --secondary-color: #aaaaaa;
-  --house-crest: url(slytherin.jpg);
+  --house-crest: url(slytherin-drawing-crest-6.png);
 }
