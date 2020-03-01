@@ -92,7 +92,7 @@ function start() {
 
 async function getJson() {
   const jsonData = await fetch("https://petlatkea.dk/2020/hogwarts/students.json");
-  const bloodStatus = await fetch("https://petlatkea.dk/2020/hogwarts/families.json");
+  const bloodStatus = await fetch("://petlatkea.dk/2020/hogwarts/families.json");
 
   studentJSON = await jsonData.json();
   bloodArray = await bloodStatus.json();
