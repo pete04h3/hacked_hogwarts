@@ -42,8 +42,6 @@ function start() {
 
   countsOfStudents = 0;
 
-  document.querySelector("#systemishacked").classList.add("show");
-
   // Adds event-listeners to filter and sort buttons
   // FILTER BUTTONS.
   //THE HARD-CODED WAY
@@ -113,7 +111,8 @@ function displayList(list) {
 }
 
 //Filtering by House.
-
+//THE HARD WAY
+/* 
 function filterGryffindor() {
   currentList = allOfStudent.filter(isGryffindor);
   displayList(currentList);
@@ -152,7 +151,7 @@ function isSlytherin(student) {
 
 function isAll(student) {
   return student;
-}
+} */
 
 //POPUP
 function showPopup(student) {
@@ -261,8 +260,6 @@ function cleanData(studentData) {
     student.image = null;
   }
 
-  //Crests
-
   // GENDER
 
   let genderDisplay = studentData.gender;
@@ -315,6 +312,7 @@ function showStudent(student) {
   }
 
   //setstar
+  // SQUAD
 
   let studentStar = klon.querySelector(".squad");
 
@@ -323,7 +321,7 @@ function showStudent(student) {
   } else {
     studentStar.textContent = "🎖";
   }
-  //star click function
+  //SQUAD click function
 
   klon.querySelector(".squad").addEventListener("click", function() {
     if (hackTheSystem == true) {
@@ -362,7 +360,9 @@ function showStudent(student) {
   });
 }
 
-//STJERNER
+//SQUAD Function
+//Makes sure that user only can choose from Slytherin house
+//And if the students are purebloods
 
 function setStar(student) {
   if (student.house == "Slytherin " && student.star == false) {

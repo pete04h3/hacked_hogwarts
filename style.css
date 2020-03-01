@@ -318,24 +318,41 @@ li:hover {
   color: palegoldenrod;
 }
 
+/***CRESTS***/
+
+.crest {
+  width: 200px;
+  height: 200px;
+  background-image: var(--house-crest);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  bottom: 70px;
+  right: 70px;
+}
+
 /****HOUSE COLORS****/
 
 [data-house="Hufflepuff"] {
   --primary-color: #d6c913;
   --secondary-color: #000000;
+  --house-crest: url(hufflepuff.png);
 }
 
 [data-house="Gryffindor"] {
   --primary-color: #7f0909;
   --secondary-color: #ffc500;
+  --house-crest: url(gryffindor.jpg);
 }
 
 [data-house="Ravenclaw"] {
   --primary-color: #000a90;
   --secondary-color: #946b2d;
+  --house-crest: url(ravenclaw.png);
 }
 
 [data-house="Slytherin"] {
   --primary-color: #0d6217;
   --secondary-color: #aaaaaa;
+  --house-crest: url(slytherin.jpg);
 }
